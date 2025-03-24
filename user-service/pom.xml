@@ -62,6 +62,10 @@
 			<groupId>com.github.xiaoymin</groupId>
 			<artifactId>knife4j-spring-boot-starter</artifactId>
 		</dependency>
+		<dependency>
+            <groupId>com.useful-person</groupId>
+            <artifactId>common-utils</artifactId>
+        </dependency>
 	</dependencies>
 	<build>
 		<plugins>
