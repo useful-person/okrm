@@ -1,6 +1,6 @@
 services:
   mysql:
-    image: mysql:latest
+    image: mysql:8
     container_name: mysql-container
     restart: always
     environment:
@@ -9,9 +9,11 @@ services:
       MYSQL_USER: myuser
       MYSQL_PASSWORD: secret
     ports:
-      - "3306:3306"
+      - "3307:3306"
+    networks:
+      - app-network
     volumes:
-      - mysql_data:/var/lib/mysql
+      - /Users/chenbitao/Developer/docker/okrm/mysql/data:/var/lib/mysql
 
   okrm-user-service:
     build: .
@@ -26,7 +28,7 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_DOCKER_COMPOSE_ENABLED: false
     ports:
-      - "8080:8080"
+      - "8081:8080"
     networks:
       - app-network
 
