@@ -80,7 +80,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<!-- 这里指定 Main 类 -->
-					<mainClass>com.example.demo.UserServiceApplication</mainClass>
+					<mainClass>com.useful_person.okrm.user_service.UserServiceApplication</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>

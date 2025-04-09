@@ -95,3 +95,13 @@ mvn clean install -Drevision=0.0.1-SNAPSHOT
 | `-Drevision=xxx`（如果 `pom.xml` 使用 `revision` 变量） | ❌否 | ✅是 |  
 
 如果想真正修改 `version`，推荐 `mvn versions:set -DnewVersion=xxx`。
+
+cd user-service
+mvn spring-boot:run
+
+启用docker
+
+```
+# 是否启用docker
+spring.docker.compose.enabled=true
+```

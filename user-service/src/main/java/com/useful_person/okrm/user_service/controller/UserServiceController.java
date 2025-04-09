@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.useful_person.okrm.user_service.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.dao.UserRepository;
-import com.example.demo.domain.User;
 import com.example.demo.utils.StringUtils;
+import com.useful_person.okrm.user_service.dao.UserRepository;
+import com.useful_person.okrm.user_service.domain.User;
 
 @Controller	
 @RequestMapping(path="/demo")
-public class DemoController {
+public class UserServiceController {
 
     @Autowired
     private UserRepository userRepository;

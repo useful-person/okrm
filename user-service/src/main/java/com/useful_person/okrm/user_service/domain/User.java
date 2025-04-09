@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.useful_person.okrm.user_service.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
