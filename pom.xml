@@ -104,8 +104,8 @@
 	<modules>
 		<module>common-utils</module>
 		<module>user-service</module>
-		<!-- <module>sms-service</module>
-		<module>email-service</module> -->
+		<module>sms-service</module>
+		<module>email-service</module>
 	</modules>
 	<build>
 		<pluginManagement>

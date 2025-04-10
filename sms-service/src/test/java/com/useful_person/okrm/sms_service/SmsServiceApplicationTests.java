@@ -1,4 +1,4 @@
-package com.useful_person.okrm.useful_person;
+package com.useful_person.okrm.sms_service;
 
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.MySQLContainer;

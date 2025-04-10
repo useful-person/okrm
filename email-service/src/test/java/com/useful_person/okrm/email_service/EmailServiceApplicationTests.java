@@ -1,10 +1,10 @@
-package com.example.demo;
+package com.useful_person.okrm.email_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class EmailServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
