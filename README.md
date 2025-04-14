@@ -1,4 +1,4 @@
-
+# OKRM
 
 ## Maven操作
 
@@ -33,6 +33,7 @@ mvn clean install -DskipTests
 ```
 
 ### 运行 user-service
+
 ```bash
 cd user-service
 mvn spring-boot:run
@@ -53,40 +54,55 @@ user-service 就可以使用 common-utils 里的工具类了。
 ## 如何正确修改 `version`  
 
 ### 方法 1：手动修改 `pom.xml`  
+
 ```xml
 <version>0.0.1-SNAPSHOT</version>
 ```  
+
 然后运行：  
+
 ```bash
 mvn clean install
 ```  
 
 ### 使用 `versions:set` 插件  
+
 如果想自动修改 `pom.xml` 的 `version`，需要使用 `maven-versions-plugin`：  
+
 ```bash
 mvn versions:set -DnewVersion=0.0.1-SNAPSHOT
 ```  
+
 然后提交修改：  
+
 ```bash
 mvn versions:commit
 ```  
+
 这会真正修改 `pom.xml` 里的 `version`，然后再运行：  
+
 ```bash
 mvn clean install
 ```  
 
 ### 临时指定版本（不修改 `pom.xml`）  
+
 如果只是想在一次构建中使用临时版本，而不修改 `pom.xml`：  
+
 ```bash
 mvn clean install -Drevision=0.0.1-SNAPSHOT
 ```  
+
 这个方法适用于 `pom.xml` 使用 `revision` 变量：  
+
 ```xml
 <version>${revision}</version>
 ```  
+
 这样 `-Drevision=0.0.1-SNAPSHOT` 就能生效。  
 
 ### 总结  
+
 | 方法 | 是否修改 `pom.xml` | 是否影响 `install` |  
 |---------|----------------|------------------|  
 | `-Dversion=xxx` | ❌ 否 | ❌ 否 |  
@@ -101,7 +117,7 @@ mvn spring-boot:run
 
 启用docker
 
-```
+```sh
 # 是否启用docker
 spring.docker.compose.enabled=true
 ```
