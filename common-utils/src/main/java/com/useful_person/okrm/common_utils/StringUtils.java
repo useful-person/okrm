@@ -1,4 +1,4 @@
-package com.example.demo.utils;
+package com.useful_person.okrm.common_utils;
 
 /**
  * 实用的字符串操作类。

@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.utils.StringUtils;
+import com.useful_person.okrm.common_utils.StringUtils;
 import com.useful_person.okrm.user_service.dao.UserRepository;
 import com.useful_person.okrm.user_service.domain.User;
 
-@Controller	
+@Controller
 @RequestMapping(path="/demo")
 public class UserServiceController {
 
