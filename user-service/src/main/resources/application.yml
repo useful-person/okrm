@@ -19,3 +19,30 @@
 #       nodes:
 #         - localhost:7001
 #         - localhost:7002
+spring:
+  application:
+    name: user-service
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/user_db
+    username: myuser
+    password: ENC(WDYgHWcc1tNPwrX5vHV/bLhMOjokAensnK9nUnUKup8UGsL41zjjbfTpBFHaaqBJ)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  docker:
+    compose:
+      enabled: false
+
+server:
+  port: 9000
+  # profiles:
+  #   active: dev
+
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}

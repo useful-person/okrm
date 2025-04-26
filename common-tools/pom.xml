@@ -10,11 +10,11 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>com.useful-person</groupId>
-    <artifactId>common-utils</artifactId>
+    <artifactId>common-tools</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>common-utils</name>
+    <name>common-tools</name>
     <packaging>jar</packaging>
-    <description>common utils project for Spring Boot</description>
+    <description>common tools project for Spring Boot</description>
     <properties>
     </properties>
     <dependencies>
@@ -57,9 +57,17 @@
             <artifactId>testcontainers</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-maven-plugin</artifactId>
+            </plugin>
             <!-- Surefire 插件要支持 JUnit 5 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

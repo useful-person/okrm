@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: user-service
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/user_db
+    username: myuser
+    password: ENC(GsHYQei0ihJ8TsAUWHetnDyl8Futp+8EYMtr1QoKapQ0PtEILeljSXB2UoAOzcwQ)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  docker:
+    compose:
+      enabled: false
+
+server:
+  port: 10000

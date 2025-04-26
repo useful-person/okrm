@@ -16,9 +16,14 @@
     <packaging>jar</packaging>
     <description>sms service project for Spring Boot</description>
     <properties>
-        <!-- <java.version>${java.version}</java.version> -->
     </properties>
     <dependencies>
+        <!-- Lombok（简化 Java 代码） -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>

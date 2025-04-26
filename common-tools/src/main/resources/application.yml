@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: okrm-common-tools
+
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
