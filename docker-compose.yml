@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  mysql-primary:
+    image: mysql:8
+    container_name: mysql-primary
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: user_db
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: ENC(WDYgHWcc1tNPwrX5vHV/bLhMOjokAensnK9nUnUKup8UGsL41zjjbfTpBFHaaqBJ)
+    ports:
+      - "3307:3306"
+    volumes:
+      - /Users/chenbitao/Developer/docker/okrm/mysql/primary:/var/lib/mysql
+      - ./mysql-primary.cnf:/etc/mysql/conf.d/my.cnf
+    networks:
+      - app-network
+
+  mysql-secondary-1:
+    image: mysql:8
+    container_name: mysql-secondary-1
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: user_db
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: ENC(WDYgHWcc1tNPwrX5vHV/bLhMOjokAensnK9nUnUKup8UGsL41zjjbfTpBFHaaqBJ)
+    ports:
+      - "3308:3306"
+    depends_on:
+      - mysql-primary
+    volumes:
+      - /Users/chenbitao/Developer/docker/okrm/mysql/secondary-1:/var/lib/mysql
+      - ./mysql-secondary.cnf:/etc/mysql/conf.d/my.cnf
+    networks:
+      - app-network
+
+  user-service:
+    build: .
+    container_name: user-service
+    restart: always
+    depends_on:
+      - mysql-primary
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-primary:3306/user_db
+      SPRING_DATASOURCE_USERNAME: myuser
+      SPRING_DATASOURCE_PASSWORD: ENC(WDYgHWcc1tNPwrX5vHV/bLhMOjokAensnK9nUnUKup8UGsL41zjjbfTpBFHaaqBJ)
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_DOCKER_COMPOSE_ENABLED: false
+    ports:
+      - "8081:8080"
+    networks:
+      - app-network
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
