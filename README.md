@@ -398,3 +398,192 @@ java -Djasypt.encryptor.password.db=dbSecretKey \
 2. **为每个密码使用不同的密钥解密**：通过配置文件或启动时的参数来指定不同的密钥解密不同的密码。
 
 3. **Jasypt 配置**：你可以为每个敏感信息创建不同的解密器，并在 Spring Boot 配置文件中进行配置。
+
+## docker 镜像地址
+
+registry.cn-hangzhou.aliyuncs.com/useful-person/
+
+docker compose --env-file .env.unix up
+docker compose --env-file .env.window up
+
+`.env` 文件**本身不能自动识别当前操作系统或环境来切换变量**，它只是一个静态的环境变量文件。但你可以用**一些变通方案**来实现 **“按平台选择不同配置”** 的效果：
+
+---
+
+## ✅ 推荐方案：**多个 `.env` 文件 + 启动时指定**
+
+### 示例结构：
+
+```
+.
+├── docker-compose.yml
+├── .env.mac
+├── .env.windows
+├── .env.linux
+```
+
+### 示例内容（`.env.mac`）：
+
+```env
+MYSQL_PRIMARY_DATA_PATH=/Users/you/docker-data/mysql-primary
+MYSQL_SECONDARY_DATA_PATH=/Users/you/docker-data/mysql-secondary
+```
+
+### 示例内容（`.env.windows`）：
+
+```env
+MYSQL_PRIMARY_DATA_PATH=/c/docker-data/mysql-primary
+MYSQL_SECONDARY_DATA_PATH=/c/docker-data/mysql-secondary
+```
+
+---
+
+### 启动方式（根据系统选用）：
+
+```bash
+# macOS
+docker compose --env-file .env.mac up
+
+# Windows（Git Bash）
+docker compose --env-file .env.windows up
+
+# Linux
+docker compose --env-file .env.linux up
+```
+
+---
+
+## ⚙️ 进阶方案：用脚本动态选择 `.env`
+
+你可以写一个简单的启动脚本，根据操作系统自动加载对应 `.env` 文件。
+
+### 示例：Bash 启动脚本 `start.sh`（适用于 macOS/Linux）
+
+```bash
+#!/bin/bash
+
+case "$(uname -s)" in
+   Darwin)
+     ENV_FILE=".env.mac"
+     ;;
+   Linux)
+     ENV_FILE=".env.linux"
+     ;;
+   *)
+     echo "Unsupported OS"
+     exit 1
+     ;;
+esac
+
+docker compose --env-file $ENV_FILE up
+```
+
+### 示例：PowerShell 脚本 `start.ps1`（适用于 Windows）
+
+```powershell
+$envFile = ".env.windows"
+docker compose --env-file $envFile up
+```
+
+---
+
+### 总结：
+
+| 方法               | 是否推荐  | 自动判断平台 | 跨平台友好 | 难度  |
+| ---------------- | ----- | ------ | ----- | --- |
+| 单 `.env` 文件      | ❌ 不推荐 | ❌      | ❌     | 低   |
+| 多 `.env` 文件 + 指定 | ✅ 推荐  | ❌（手动选） | ✅     | 中   |
+| 脚本自动判断平台         | ✅ 推荐  | ✅      | ✅     | 中-高 |
+
+---
+
+在使用 Docker 构建和部署 Spring 应用时，有多种方式可以“注入” Spring 配置，例如 `application.properties` 或 `application.yml` 文件、环境变量、命令行参数等。下面是几种常用的方式和如何在 `Dockerfile` 和运行容器时操作它们。
+
+---
+
+## ✅ 方法一：使用外部配置文件挂载
+
+这是最推荐的方法，配置文件与镜像解耦，适合不同环境部署。
+
+### Dockerfile 示例（无需特别处理配置）：
+
+```Dockerfile
+FROM openjdk:17-jdk-slim
+COPY target/myapp.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+```
+
+### 启动容器时挂载配置文件：
+
+```bash
+docker run -v /path/to/application.properties:/config/application.properties \
+  -e SPRING_CONFIG_LOCATION=file:/config/application.properties \
+  myapp
+```
+
+---
+
+## ✅ 方法二：使用环境变量注入配置
+
+Spring Boot 支持从环境变量中读取配置。
+
+### Dockerfile 示例：
+
+```Dockerfile
+FROM openjdk:17-jdk-slim
+COPY target/myapp.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+```
+
+### 启动容器时注入环境变量：
+
+```bash
+docker run -e SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mydb \
+  -e SPRING_DATASOURCE_USERNAME=root \
+  -e SPRING_DATASOURCE_PASSWORD=secret \
+  myapp
+```
+
+---
+
+## ✅ 方法三：打包时直接包含配置（不推荐动态环境）
+
+将配置文件直接 COPY 到镜像中。
+
+### Dockerfile 示例：
+
+```Dockerfile
+FROM openjdk:17-jdk-slim
+COPY target/myapp.jar app.jar
+COPY config/application.properties /config/application.properties
+ENTRYPOINT ["java", "-jar", "/app.jar", "--spring.config.location=file:/config/application.properties"]
+```
+
+---
+
+## ✅ 方法四：使用命令行参数覆盖配置
+
+```Dockerfile
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+```
+
+然后运行时：
+
+```bash
+docker run myapp --spring.profiles.active=prod --server.port=8085
+```
+
+---
+
+## 小结：推荐实践
+
+| 方法     | 适用场景               | 是否推荐       |
+| ------ | ------------------ | ---------- |
+| 配置挂载   | 可灵活调整部署配置          | ✅ 推荐       |
+| 环境变量   | 适合 CI/CD 和 Secrets | ✅ 推荐       |
+| 镜像内嵌配置 | 测试或固定配置场景          | ⚠️ 不推荐用于生产 |
+| 命令行参数  | 小型调整（如 profile）    | ✅ 推荐       |
+
+---
+
+mvn clean install -DskipTests && docker compose --env-file .env.window down --volumes --remove-orphans && docker compose --env-file .env.window up --build -d

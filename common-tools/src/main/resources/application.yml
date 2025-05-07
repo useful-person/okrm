@@ -4,4 +4,4 @@ spring:
 
 jasypt:
   encryptor:
-    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+    password: ${JASYPT_ENCRYPTOR_PASSWORD:okrm@2025}

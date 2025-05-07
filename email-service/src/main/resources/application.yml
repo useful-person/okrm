@@ -1,2 +1,11 @@
 server:
   port: 9002
+
+spring:
+  application:
+    name: sms-service
+
+  # 是否启用docker
+  docker:
+    compose:
+      enabled: false

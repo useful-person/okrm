@@ -8,7 +8,7 @@ spring:
     show-sql: true
 
   datasource:
-    url: jdbc:mysql://localhost:3306/user_db
+    url: jdbc:mysql://mysql-primary:3306/user_db
     username: myuser
     password: ENC(GsHYQei0ihJ8TsAUWHetnDyl8Futp+8EYMtr1QoKapQ0PtEILeljSXB2UoAOzcwQ)
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -19,3 +19,11 @@ spring:
 
 server:
   port: 10000
+
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
+      hibernate: DEBUG
