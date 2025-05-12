@@ -1,6 +1,6 @@
 # OKRM
 
-## Maven操作
+## Maven 操作
 
 ### 清理 & 构建
 
@@ -51,103 +51,102 @@ mvn spring-boot:run -Dspring-boot.run.profiles=prod
 
 user-service 就可以使用 common-utils 里的工具类了。
 
-### `mvn clean install -Dversion=0.0.1-SNAPSHOT` 为什么没有覆盖 `pom.xml` 里的 `version`  
+### `mvn clean install -Dversion=0.0.1-SNAPSHOT` 为什么没有覆盖 `pom.xml` 里的 `version`
 
-这是因为 Maven `-Dversion` 只是一个临时的 System Property，它不会修改 `pom.xml` 里的 `version`。  
+这是因为 Maven `-Dversion` 只是一个临时的 System Property，它不会修改 `pom.xml` 里的 `version`。
 
-## 为什么 `-Dversion` 不会覆盖 `pom.xml` 里的 `version`  
+## 为什么 `-Dversion` 不会覆盖 `pom.xml` 里的 `version`
 
-1. Maven 运行时 `-Dversion` 只是一个临时参数，不会修改 `pom.xml`  
-2. Maven 不会自动更新 `pom.xml`，因为 `version` 是一个 POM 元数据  
-3. Maven 只会使用 `-Dversion` 影响某些插件（如 `versions:set`），但不会影响 `install`  
+1. Maven 运行时 `-Dversion` 只是一个临时参数，不会修改 `pom.xml`
+2. Maven 不会自动更新 `pom.xml`，因为 `version` 是一个 POM 元数据
+3. Maven 只会使用 `-Dversion` 影响某些插件（如 `versions:set`），但不会影响 `install`
 
-## 如何正确修改 `version`  
+## 如何正确修改 `version`
 
-### 方法 1：手动修改 `pom.xml`  
+### 方法 1：手动修改 `pom.xml`
 
 ```xml
 <version>0.0.1-SNAPSHOT</version>
-```  
+```
 
-然后运行：  
+然后运行：
 
 ```bash
 mvn clean install
-```  
+```
 
-### 使用 `versions:set` 插件  
+### 使用 `versions:set` 插件
 
-如果想自动修改 `pom.xml` 的 `version`，需要使用 `maven-versions-plugin`：  
+如果想自动修改 `pom.xml` 的 `version`，需要使用 `maven-versions-plugin`：
 
 ```bash
 mvn versions:set -DnewVersion=0.0.1-SNAPSHOT
-```  
+```
 
-然后提交修改：  
+然后提交修改：
 
 ```bash
 mvn versions:commit
-```  
+```
 
-这会真正修改 `pom.xml` 里的 `version`，然后再运行：  
+这会真正修改 `pom.xml` 里的 `version`，然后再运行：
 
 ```bash
 mvn clean install
-```  
+```
 
-### 临时指定版本（不修改 `pom.xml`）  
+### 临时指定版本（不修改 `pom.xml`）
 
-如果只是想在一次构建中使用临时版本，而不修改 `pom.xml`：  
+如果只是想在一次构建中使用临时版本，而不修改 `pom.xml`：
 
 ```bash
 mvn clean install -Drevision=0.0.1-SNAPSHOT
-```  
+```
 
-这个方法适用于 `pom.xml` 使用 `revision` 变量：  
+这个方法适用于 `pom.xml` 使用 `revision` 变量：
 
 ```xml
 <version>${revision}</version>
-```  
+```
 
-这样 `-Drevision=0.0.1-SNAPSHOT` 就能生效。  
+这样 `-Drevision=0.0.1-SNAPSHOT` 就能生效。
 
-### 总结  
+### 总结
 
-| 方法 | 是否修改 `pom.xml` | 是否影响 `install` |  
-|---------|----------------|------------------|  
-| `-Dversion=xxx` | ❌ 否 | ❌ 否 |  
-| `versions:set` | ✅ 是 | ✅ 是 |  
-| 直接改 `pom.xml` | ✅ 是 | ✅ 是 |  
-| `-Drevision=xxx`（如果 `pom.xml` 使用 `revision` 变量） | ❌否 | ✅是 |  
+| 方法                                                    | 是否修改 `pom.xml` | 是否影响 `install` |
+| ------------------------------------------------------- | ------------------ | ------------------ |
+| `-Dversion=xxx`                                         | ❌ 否              | ❌ 否              |
+| `versions:set`                                          | ✅ 是              | ✅ 是              |
+| 直接改 `pom.xml`                                        | ✅ 是              | ✅ 是              |
+| `-Drevision=xxx`（如果 `pom.xml` 使用 `revision` 变量） | ❌ 否              | ✅ 是              |
 
 如果想真正修改 `version`，推荐 `mvn versions:set -DnewVersion=xxx`。
 
 cd user-service
 mvn spring-boot:run
 
-启用docker
+启用 docker
 
 ```sh
 # 是否启用docker
 spring.docker.compose.enabled=true
 ```
 
-
 ## 使用说明
 
-安装IDE，修改IDE编码格式为UTF-8
+安装 IDE，修改 IDE 编码格式为 UTF-8
 
-安装mysql 8.x
+安装 mysql 8.x
 
-运行redis
+运行 redis
 
-安装docker
+安装 docker
 
 docker pull redis
 
 docker run --name okrm-redis -d redis
 
-或者直接下载redis
+或者直接下载 redis
 
 make
 
@@ -159,22 +158,21 @@ make test
 
 ./src/redis-server
 
-新建mysql用户okrm并给它赋予权限
+新建 mysql 用户 okrm 并给它赋予权限
 
-安装lombok
+安装 lombok
 
-maven构建
+maven 构建
 
-maven构建
+maven 构建
 
 ```shell
 mvn clean install package -Dmaven.test.skip=true -Pprod
 ```
 
-
 ## 介绍
 
-okrm-server基于spring全家桶开发。
+okrm-server 基于 spring 全家桶开发。
 
 ## 软件架构
 
@@ -191,11 +189,6 @@ graph TD;
 	cache-->redis;
 ```
 
-
-
-
-
-
 ## 安装教程
 
 ### 数据库密码加密
@@ -208,7 +201,8 @@ mvn jasypt:encrypt -Djasypt.plugin.path="file:useful-person.okrm-server/src/main
 # 解密
 mvn jasypt:decrypt-value -Djasypt.encryptor.password="密钥" -Djasypt.plugin.value="密文"
 ```
-也可以直接使用jar包进行加解密
+
+也可以直接使用 jar 包进行加解密
 
 ```shell
 java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="root" password=security algorithm=PBEWithMD5AndDES
@@ -216,16 +210,15 @@ java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input
 java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringDecryptionCLI input="i00VogiiZ1FpZR9McY7XNw==" password=security algorithm=PBEWithMD5AndD
 ```
 
-
 ### MySQL
 
-使用root用户使用utf8mb4字符集创建okrm库，创建用户名okrm密码okrm_password授权dba、数据库okrm，
+使用 root 用户使用 utf8mb4 字符集创建 okrm 库，创建用户名 okrm 密码 okrm_password 授权 dba、数据库 okrm，
 
-使用okrm-core/src/main/resources/sql中的sql初始化持续登录的表和用户连接信息的表
+使用 okrm-core/src/main/resources/sql 中的 sql 初始化持续登录的表和用户连接信息的表
 
 ### Redis
 
-在项目根目录使用docker-compose启动redis
+在项目根目录使用 docker-compose 启动 redis
 
 ```shell
 docker-compose up -d
@@ -246,7 +239,7 @@ docker-compose rm
 /home/okrm/www/useful-person.com
 ```
 
-### nginx配置
+### nginx 配置
 
 ```
 location / {
@@ -263,27 +256,33 @@ location /api/ {
 ```
 
 ### 证书配置
-nginx配置目录`/root/nginx/conf`
+
+nginx 配置目录`/root/nginx/conf`
 将证书上传到目录`/root/nginx/conf/cert`
+
 ```shell
 scp ~/Downloads/6079910_useful-person.com_nginx/6079910_useful-person.com.* root@121.40.244.200:/root/nginx/conf/cert/
 ```
-修改对应的conf文件，将指定正确的证书地址
+
+修改对应的 conf 文件，将指定正确的证书地址
+
 ```shell
+
 ```
-重启nginx
+
+重启 nginx
+
 ```shell
 /root/nginx/nginx -s reload
 ```
+
 访问浏览，刷新证书
 
 ### 如何为不同的密码使用不同的密钥：
 
 可以为不同的敏感信息（如数据库密码、Redis 密码、MQ 密码）使用不同的密钥进行加密和解密。这可以通过 Jasypt 的配置来实现，为每个密码配置不同的密钥。
 
-
 1. **配置多个加密器**：你可以在 Spring Boot 配置文件中设置多个 Jasypt 加密器，每个加密器使用不同的密钥。
-   
 2. **使用不同的配置文件或环境变量**：可以通过环境变量或者命令行参数来指定不同的密钥，确保每个敏感信息使用不同的加密密钥进行解密。
 
 ### 步骤 1：为不同的密码设置不同的加密密钥
@@ -293,19 +292,21 @@ scp ~/Downloads/6079910_useful-person.com_nginx/6079910_useful-person.com.* root
 例如，使用 Jasypt 加密工具为不同的密码生成加密后的值。
 
 - **数据库密码加密**：
-   ```bash
-   mvn jasypt:encrypt -Djasypt.encryptor.password=dbSecretKey -Djasypt.plugin.value="databasePassword"
-   ```
+
+  ```bash
+  mvn jasypt:encrypt -Djasypt.encryptor.password=dbSecretKey -Djasypt.plugin.value="databasePassword"
+  ```
 
 - **Redis 密码加密**：
-   ```bash
-   mvn jasypt:encrypt -Djasypt.encryptor.password=redisSecretKey -Djasypt.plugin.value="redisPassword"
-   ```
+
+  ```bash
+  mvn jasypt:encrypt -Djasypt.encryptor.password=redisSecretKey -Djasypt.plugin.value="redisPassword"
+  ```
 
 - **MQ 密码加密**：
-   ```bash
-   mvn jasypt:encrypt -Djasypt.encryptor.password=mqSecretKey -Djasypt.plugin.value="mqPassword"
-   ```
+  ```bash
+  mvn jasypt:encrypt -Djasypt.encryptor.password=mqSecretKey -Djasypt.plugin.value="mqPassword"
+  ```
 
 这样，你就得到了每个密码的加密值，类似于：
 
@@ -344,9 +345,9 @@ spring:
 jasypt:
   encryptor:
     password:
-      db: dbSecretKey         # 数据库密钥
-      redis: redisSecretKey   # Redis 密钥
-      mq: mqSecretKey         # MQ 密钥
+      db: dbSecretKey # 数据库密钥
+      redis: redisSecretKey # Redis 密钥
+      mq: mqSecretKey # MQ 密钥
 ```
 
 如果你想要在同一个应用中使用不同的密钥，你可以手动配置多个解密器：
@@ -394,7 +395,6 @@ java -Djasypt.encryptor.password.db=dbSecretKey \
 ### 总结：
 
 1. **为每个敏感信息使用不同的密钥加密**：你可以使用 Jasypt 对数据库密码、Redis 密码、MQ 密码分别加密，并将它们放到配置文件中，使用 `ENC(...)` 格式存储。
-   
 2. **为每个密码使用不同的密钥解密**：通过配置文件或启动时的参数来指定不同的密钥解密不同的密码。
 
 3. **Jasypt 配置**：你可以为每个敏感信息创建不同的解密器，并在 Spring Boot 配置文件中进行配置。
@@ -489,11 +489,11 @@ docker compose --env-file $envFile up
 
 ### 总结：
 
-| 方法               | 是否推荐  | 自动判断平台 | 跨平台友好 | 难度  |
-| ---------------- | ----- | ------ | ----- | --- |
-| 单 `.env` 文件      | ❌ 不推荐 | ❌      | ❌     | 低   |
-| 多 `.env` 文件 + 指定 | ✅ 推荐  | ❌（手动选） | ✅     | 中   |
-| 脚本自动判断平台         | ✅ 推荐  | ✅      | ✅     | 中-高 |
+| 方法                  | 是否推荐  | 自动判断平台 | 跨平台友好 | 难度  |
+| --------------------- | --------- | ------------ | ---------- | ----- |
+| 单 `.env` 文件        | ❌ 不推荐 | ❌           | ❌         | 低    |
+| 多 `.env` 文件 + 指定 | ✅ 推荐   | ❌（手动选） | ✅         | 中    |
+| 脚本自动判断平台      | ✅ 推荐   | ✅           | ✅         | 中-高 |
 
 ---
 
@@ -577,13 +577,15 @@ docker run myapp --spring.profiles.active=prod --server.port=8085
 
 ## 小结：推荐实践
 
-| 方法     | 适用场景               | 是否推荐       |
-| ------ | ------------------ | ---------- |
-| 配置挂载   | 可灵活调整部署配置          | ✅ 推荐       |
-| 环境变量   | 适合 CI/CD 和 Secrets | ✅ 推荐       |
-| 镜像内嵌配置 | 测试或固定配置场景          | ⚠️ 不推荐用于生产 |
-| 命令行参数  | 小型调整（如 profile）    | ✅ 推荐       |
+| 方法         | 适用场景               | 是否推荐          |
+| ------------ | ---------------------- | ----------------- |
+| 配置挂载     | 可灵活调整部署配置     | ✅ 推荐           |
+| 环境变量     | 适合 CI/CD 和 Secrets  | ✅ 推荐           |
+| 镜像内嵌配置 | 测试或固定配置场景     | ⚠️ 不推荐用于生产 |
+| 命令行参数   | 小型调整（如 profile） | ✅ 推荐           |
 
 ---
 
 mvn clean install -DskipTests && docker compose --env-file .env.window down --volumes --remove-orphans && docker compose --env-file .env.window up --build -d
+
+docker login -u 用户名 -p 密码 swr.cn-south-1.myhuaweicloud.com

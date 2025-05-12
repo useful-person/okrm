@@ -10,28 +10,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.useful_person.okrm.common_utils.StringUtils;
 import com.useful_person.okrm.user_service.dao.UserRepository;
-import com.useful_person.okrm.user_service.domain.User;
+import com.useful_person.okrm.user_service.domain.UserInfo;
 
 @Controller
-@RequestMapping(path="/demo")
+@RequestMapping(path = "/demo")
 public class UserServiceController {
 
     @Autowired
     private UserRepository userRepository;
 
     @PostMapping(path = "/add")
-    public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email) {
-        String name1 = "john";
-        System.out.println(StringUtils.toUpperCase(name1)); // 输出：JOHN
-        User n = new User();
-        n.setName(name);
+    public @ResponseBody String addNewUser(@RequestParam String username, @RequestParam String email) {
+        UserInfo n = new UserInfo();
+        n.setUsername(username);
         n.setEmail(email);
         userRepository.save(n);
         return "Saved";
     }
 
     @GetMapping(path = "/all")
-    public @ResponseBody Iterable<User> getAllUsers() {
+    public @ResponseBody Iterable<UserInfo> getAllUsers() {
         // This returns a JSON or XML with the users
         return userRepository.findAll();
     }

@@ -26,3 +26,11 @@ server:
 jasypt:
   encryptor:
     password: ${JASYPT_ENCRYPTOR_PASSWORD:okrm@2025}
+
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
+      hibernate: DEBUG
