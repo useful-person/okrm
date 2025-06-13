@@ -41,6 +41,8 @@ java -jar myapp.jar --spring.profiles.active=prod
 mvn spring-boot:run
 mvn spring-boot:run -Dspring-boot.run.profiles=prod
 
+java -Dserver.port=10000 -Dspring.datasource.url=jdbc:mysql://192.168.1.217:3307/user_db -jar user-service/target/user-service-0.0.1-SNAPSHOT.jar
+
 ```
 
 如果是用 IDE（比如 IntelliJ IDEA），也可以在 Run/Debug Configurations → VM Options 里加：
@@ -50,6 +52,8 @@ mvn spring-boot:run -Dspring-boot.run.profiles=prod
 ```
 
 user-service 就可以使用 common-utils 里的工具类了。
+
+## 版本号规范
 
 ### `mvn clean install -Dversion=0.0.1-SNAPSHOT` 为什么没有覆盖 `pom.xml` 里的 `version`
 

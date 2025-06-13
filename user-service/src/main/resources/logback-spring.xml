@@ -1,0 +1,15 @@
+<configuration>
+  <springProperty scope="context" name="LOG_PATH" source="logging.file.path"
+    defaultValue="/Users/chenbitao/.okrm/logs/user-service" />
+
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>${LOG_PATH}/app.log</file>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="FILE" />
+  </root>
+</configuration>

@@ -1,8 +1,14 @@
+server:
+  port: 9000
+  profiles:
+    active: dev
+
 spring:
   application:
     name: user-service
 
   jpa:
+    open-in-view: false
     hibernate:
       ddl-auto: update
     show-sql: true
@@ -25,19 +31,20 @@ spring:
     compose:
       enabled: false
 
-server:
-  port: 9000
-  # profiles:
-  #   active: dev
-
 jasypt:
   encryptor:
     password: ${JASYPT_ENCRYPTOR_PASSWORD:okrm@2025}
 
 logging:
+  file:
+    path: /Users/chenbitao/.okrm/logs/user-service
   level:
+    root: INFO
     org:
       springframework:
         orm:
           jpa: DEBUG
       hibernate: DEBUG
+    com:
+      useful_person:
+        okrm: DEBUG
