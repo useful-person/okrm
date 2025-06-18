@@ -1,5 +1,20 @@
 # OKRM
 
+## 项目结构
+
+```text
+├── gateway （Nginx + API 入口 + 限流）
+├── auth-service （统一认证服务：注册、登录、token 签发）
+├── user-service （用户信息、实名认证、邀请码等）
+├── notification-service （邮件、短信、消息推送）
+├── captcha-service （图形验证码、滑块验证、行为分析）
+├── oauth-service （第三方登录服务对接）
+├── admin-panel （Nuxt 3 管理后台）
+├── web-client （Nuxt 3 / Vue 前端）
+├── common-library （DTO、工具、验证库）
+
+```
+
 ## Maven 操作
 
 ### 清理 & 构建

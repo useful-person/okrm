@@ -2,6 +2,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "SpringAiApplication",
+      "request": "launch",
+      "mainClass": "com.useful_person.ai.SpringAiApplication",
+      "projectName": "ai-service"
+    },
+    {
+      "type": "java",
       "name": "UserServiceApplication",
       "request": "launch",
       "mainClass": "com.useful_person.okrm.user_service.UserServiceApplication",

@@ -9,6 +9,7 @@
     <spring.version>3.4.4</spring.version>
     <!-- 兼容 Spring Boot 3.x -->
     <jasypt.version>3.0.5</jasypt.version>
+    <spring-ai.version>1.0.0-M6</spring-ai.version>
   </properties>
   <profiles>
     <profile>
@@ -76,7 +77,11 @@
         <artifactId>commons-lang3</artifactId>
         <version>3.12.0</version>
       </dependency>
-
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.13.1</version>
+      </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-collections4</artifactId>
@@ -183,14 +188,36 @@
         <artifactId>common-utils</artifactId>
         <version>0.0.1-SNAPSHOT</version>
       </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>2025.0.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- AI相关依赖 -->
+      <dependency>
+        <groupId>org.springframework.ai</groupId>
+        <artifactId>spring-ai-openai-spring-boot-starter</artifactId>
+        <version>${spring-ai.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.ai</groupId>
+        <artifactId>spring-ai-bom</artifactId>
+        <version>${spring-ai.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <modules>
+    <module>gateway</module>
     <module>common-tools</module>
     <module>common-utils</module>
     <module>user-service</module>
     <module>sms-service</module>
     <module>email-service</module>
+    <module>ai-service</module>
   </modules>
   <build>
     <pluginManagement>
