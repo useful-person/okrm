@@ -191,7 +191,7 @@ mvn clean install package -Dmaven.test.skip=true -Pprod
 
 ## 介绍
 
-okrm-server 基于 spring 全家桶开发。
+okrm 基于 spring 全家桶开发。
 
 ## 软件架构
 
