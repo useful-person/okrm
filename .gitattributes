@@ -1,0 +1,8 @@
+# 强制 Windows 脚本使用 CRLF
+*.cmd text eol=crlf
+
+# 强制 shell 脚本使用 LF（Linux）
+*.sh text eol=lf
+
+# 强制所有其他文本文件使用 LF（建议统一）
+* text=auto eol=lf

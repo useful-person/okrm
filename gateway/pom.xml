@@ -9,7 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath> <!-- 父模块的路径 -->
   </parent>
-  <groupId>com.useful_person</groupId>
+  <groupId>com.useful-person</groupId>
   <artifactId>gateway</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>gateway</name>

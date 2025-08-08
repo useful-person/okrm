@@ -9,7 +9,7 @@ mvn clean install -DskipTests
 ## 启动服务
 
 ```
-java -Dspring.ai.openai.api-key=你的密钥 -jar ai-service/target/ai-service-1.0-SNAPSHOT.jar
+java -Dspring.ai.openai.api-key=你的密钥 -jar ai-service/target/ai-service-0.0.1-SNAPSHOT.jar
 ```
 
 ```
