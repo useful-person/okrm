@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.useful_person.nacos.properties.SecurityProperties;
 import com.useful_person.okrm.user_service.dao.UserRepository;
 import com.useful_person.okrm.user_service.domain.UserInfo;
 
@@ -17,6 +18,9 @@ public class UserServiceController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private SecurityProperties securityProperties;
 
     @PostMapping(path = "/add")
     public @ResponseBody String addNewUser(@RequestParam String username, @RequestParam String email) {
@@ -32,4 +36,10 @@ public class UserServiceController {
         // This returns a JSON or XML with the users
         return userRepository.findAll();
     }
+
+    // @GetMapping(path = "/config")
+    // public @ResponseBody String getConfig() {
+
+    // return JSON.toJSONString(securityProperties);
+    // }
 }

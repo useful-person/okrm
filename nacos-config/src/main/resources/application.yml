@@ -7,6 +7,7 @@ spring:
   config:
     import:
       - nacos:okrm-gateway.yml?refreshEnabled=true&group=DEFAULT_GROUP
+      - nacos:security.yml?refreshEnabled=true&group=DEFAULT_GROUP
   cloud:
     nacos:
       serverAddr: "[::1]:8848"

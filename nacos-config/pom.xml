@@ -1,19 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>com.useful-person</groupId>
     <artifactId>okrm</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath> <!-- 父模块的路径 -->
+    <relativePath>../pom.xml</relativePath>
   </parent>
+
   <groupId>com.useful-person</groupId>
   <artifactId>nacos-config</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>nacos-config</name>
   <description>Demo project for Spring Boot</description>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -28,11 +30,49 @@
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 -->
+    <dependency>
+      <groupId>com.alibaba.fastjson2</groupId>
+      <artifactId>fastjson2</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+    <!-- Lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
+
+  <profiles>
+    <!-- 开发环境 profile -->
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-devtools</artifactId>
+          <scope>runtime</scope>
+          <optional>true</optional>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <!-- 生产环境 profile -->
+    <profile>
+      <id>prod</id>
+    </profile>
+  </profiles>
 
   <build>
     <plugins>
@@ -50,5 +90,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>

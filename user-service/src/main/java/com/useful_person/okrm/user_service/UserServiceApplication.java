@@ -2,10 +2,14 @@ package com.useful_person.okrm.user_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+import com.useful_person.nacos.properties.SecurityProperties;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableConfigurationProperties(SecurityProperties.class)
 public class UserServiceApplication {
 
     /**

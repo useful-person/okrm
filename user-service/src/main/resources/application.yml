@@ -6,8 +6,15 @@ spring:
     active: dev
   application:
     name: user-service
+  config:
+    import:
+      - nacos:security.yml?refreshEnabled=true&group=DEFAULT_GROUP
   cloud:
     nacos:
+      serverAddr: "[::1]:8848"
+      # 以下配置项必须填写
+      username: "nacos"
+      password: "nacos"
       discovery:
         server-addr: 127.0.0.1:8848
         # namespace: DEFAULT_NAMESPACE

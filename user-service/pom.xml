@@ -91,10 +91,19 @@
       <version>1.6.0</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.useful-person</groupId>
+      <artifactId>nacos-config</artifactId>
+    </dependency>
     <!-- Nacos注册中心客户端 -->
     <dependency>
       <groupId>com.alibaba.cloud</groupId>
       <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
     </dependency>
   </dependencies>
   <build>
