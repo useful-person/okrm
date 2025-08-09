@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="nacos-config" />
         <module name="sms-service" />
         <module name="email-service" />
         <module name="common-utils" />
@@ -24,6 +25,7 @@
       <module name="common-utils" options="-parameters" />
       <module name="email-service" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="nacos-config" options="-parameters" />
       <module name="okrm" options="" />
       <module name="sms-service" options="-parameters" />
       <module name="user-service" options="-parameters" />

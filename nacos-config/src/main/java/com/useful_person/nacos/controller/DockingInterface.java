@@ -1,4 +1,4 @@
-package com.useful_person.nacos;
+package com.useful_person.nacos.controller;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
