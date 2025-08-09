@@ -90,6 +90,20 @@
       <artifactId>loki-logback-appender</artifactId>
       <version>1.6.0</version>
     </dependency>
+
+    <!-- Nacos注册中心客户端 -->
+    <dependency>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+    </dependency>
+
+    <!-- 如果需要配置中心，也可以加 -->
+    <!--
+    <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+    </dependency>
+    -->
   </dependencies>
   <build>
     <plugins>

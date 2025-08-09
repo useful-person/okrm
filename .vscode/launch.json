@@ -14,7 +14,7 @@
       "request": "launch",
       "mainClass": "com.useful_person.okrm.user_service.UserServiceApplication",
       "projectName": "user-service",
-      "vmArgs": "-Dspring.profiles.active=local"
+      "vmArgs": "-Dspring.profiles.active=local -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=53859 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=user-service"
     },
     {
       "type": "java",
@@ -37,6 +37,26 @@
       "args": "",
       "envFile": "${workspaceFolder}/.env",
       "vmArgs": "-Dspring.profiles.active=local"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-GatewayApplication<gateway>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.useful_person.gateway.GatewayApplication",
+      "projectName": "gateway",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-NacosConfigApplication<nacos-config>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.useful_person.nacos.NacosConfigApplication",
+      "projectName": "nacos-config",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }

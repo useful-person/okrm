@@ -1,29 +1,17 @@
 server:
-  port: 3721
+  port: 8000
 
 spring:
   application:
-    name: gateway
+    name: gateway-service
   cloud:
     nacos:
-      discovery:
-        server-addr: localhost:8848
+      serverAddr: "[::1]:8848"
+      # 以下配置项必须填写
+      username: "nacos"
+      password: "nacos"
     gateway:
       discovery:
         locator:
-          enabled: true
-      routes:
-        - id: user-service
-          uri: lb://user-service
-          predicates:
-            - Path=/user/**
-          filters:
-            - name: RequestRateLimiter
-              args:
-                keyResolver: userKeyResolver
-                redis-rate-limiter.replenishRate: 10
-                redis-rate-limiter.burstCapacity: 20
-        - id: auth-service
-          uri: lb://auth-service
-          predicates:
-            - Path=/auth/**
+          enabled: true # 开启服务发现自动路由
+          lower-case-service-id: true # 可选，服务名转小写

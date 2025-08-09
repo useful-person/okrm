@@ -6,7 +6,17 @@ server:
 spring:
   application:
     name: user-service
-
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        # namespace: DEFAULT_NAMESPACE
+        service: ${spring.application.name}
+        group: DEFAULT_GROUP
+        enabled: true
+        register-enabled: true
+        username: "nacos"
+        password: "nacos"
   jpa:
     open-in-view: false
     hibernate:
@@ -49,3 +59,9 @@ logging:
     com:
       useful_person:
         okrm: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
