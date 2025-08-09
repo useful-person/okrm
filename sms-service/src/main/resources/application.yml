@@ -1,12 +1,41 @@
 server:
   port: 9001
+spring:
   profiles:
     active: dev
-spring:
   application:
     name: sms-service
-
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        # namespace: DEFAULT_NAMESPACE
+        service: ${spring.application.name}
+        group: DEFAULT_GROUP
+        enabled: true
+        register-enabled: true
+        username: "nacos"
+        password: "nacos"
+  datasource:
+    url: jdbc:mysql://localhost:3306/sms-service?useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
   # 是否启用docker
   docker:
     compose:
       enabled: false
+
+logging:
+  file:
+    path: /Users/chenbitao/.okrm/logs/sms-service
+  level:
+    root: INFO
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
+      hibernate: DEBUG
+    com:
+      "[useful_person]":
+        okrm: DEBUG

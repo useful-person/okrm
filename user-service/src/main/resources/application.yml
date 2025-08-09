@@ -1,9 +1,9 @@
 server:
   port: 9000
-  profiles:
-    active: dev
 
 spring:
+  profiles:
+    active: dev
   application:
     name: user-service
   cloud:
@@ -24,11 +24,11 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        format_sql: true
-        use_sql_comments: true
+        "[format_sql]": true
+        "[use_sql_comments]": true
         dialect: org.hibernate.dialect.MySQLDialect
         jdbc:
-          time_zone: UTC
+          "[time_zone]": UTC
     # database-platform: org.hibernate.dialect.MySQL8Dialect
 
   datasource:
@@ -57,7 +57,7 @@ logging:
           jpa: DEBUG
       hibernate: DEBUG
     com:
-      useful_person:
+      "[useful_person]":
         okrm: DEBUG
 
 management:

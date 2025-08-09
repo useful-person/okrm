@@ -1,6 +1,22 @@
+server:
+  port: 9003
+
 spring:
+  profiles:
+    active: dev
   application:
     name: ai-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        # namespace: DEFAULT_NAMESPACE
+        service: ${spring.application.name}
+        group: DEFAULT_GROUP
+        enabled: true
+        register-enabled: true
+        username: "nacos"
+        password: "nacos"
   ai:
     openai:
       # api-key:
@@ -15,3 +31,17 @@ spring:
           # 多样性系数。常值在0.1-0.9之间，数值越大，生成的内容越多样化，推荐设置0.7
           temperature: 0.7
         enabled: true
+
+logging:
+  file:
+    path: /Users/chenbitao/.okrm/logs/email-service
+  level:
+    root: INFO
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
+      hibernate: DEBUG
+    com:
+      "[useful_person]":
+        okrm: DEBUG
