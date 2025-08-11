@@ -28,7 +28,7 @@ spring:
 
 logging:
   file:
-    path: /Users/chenbitao/.okrm/logs/sms-service
+    path: ${user.home}/.okrm/logs/sms-service
   level:
     root: INFO
     org:

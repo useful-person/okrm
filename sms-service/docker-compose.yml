@@ -13,7 +13,7 @@ services:
     networks:
       - app-network
     volumes:
-      - /Users/chenbitao/Developer/docker/okrm/mysql/data:/var/lib/mysql
+      - ${user.home}/Developer/docker/okrm/mysql/data:/var/lib/mysql
 
   user-service:
     build: .

@@ -29,7 +29,7 @@ spring:
 
 logging:
   file:
-    path: /Users/chenbitao/.okrm/logs/email-service
+    path: ${user.home}/.okrm/logs/email-service
   level:
     root: INFO
     org:

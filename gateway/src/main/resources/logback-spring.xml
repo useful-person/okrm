@@ -1,6 +1,6 @@
 <configuration>
   <springProperty scope="context" name="LOG_PATH" source="logging.file.path"
-    defaultValue="/Users/chenbitao/.okrm/logs/gateway" />
+    defaultValue="${user.home}/.okrm/logs/gateway" />
 
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>

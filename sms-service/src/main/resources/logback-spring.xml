@@ -1,6 +1,6 @@
 <configuration>
   <springProperty scope="context" name="LOG_PATH" source="logging.file.path"
-    defaultValue="/Users/chenbitao/.okrm/logs/sms-service" />
+    defaultValue="${user.home}/.okrm/logs/sms-service" />
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
       <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson2.JSON;
 import com.useful_person.nacos.properties.SecurityProperties;
 import com.useful_person.okrm.user_service.dao.UserRepository;
 import com.useful_person.okrm.user_service.domain.UserInfo;
@@ -37,9 +38,9 @@ public class UserServiceController {
         return userRepository.findAll();
     }
 
-    // @GetMapping(path = "/config")
-    // public @ResponseBody String getConfig() {
+    @GetMapping(path = "/config")
+    public @ResponseBody String getConfig() {
 
-    // return JSON.toJSONString(securityProperties);
-    // }
+        return JSON.toJSONString(securityProperties);
+    }
 }

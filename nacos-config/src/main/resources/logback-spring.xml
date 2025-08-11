@@ -1,6 +1,6 @@
 <configuration>
   <springProperty scope="context" name="LOG_PATH" source="logging.file.path"
-    defaultValue="/Users/chenbitao/.okrm/logs/nacos-config" />
+    defaultValue="${user.home}/.okrm/logs/nacos-config" />
 
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>

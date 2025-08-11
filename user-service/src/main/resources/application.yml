@@ -55,7 +55,7 @@ jasypt:
 
 logging:
   file:
-    path: /Users/chenbitao/.okrm/logs/user-service
+    path: ${user.home}/.okrm/logs/user-service
   level:
     root: INFO
     org:
