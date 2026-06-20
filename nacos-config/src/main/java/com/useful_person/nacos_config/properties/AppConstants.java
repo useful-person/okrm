@@ -5,9 +5,13 @@ package com.useful_person.nacos_config.properties;
  * @author peter
  *
  */
-public interface AppConstants {
+public final class AppConstants {
 
-    String DEFAULT_RETURN_CODE = "code";
+    private AppConstants() {
+        throw new IllegalStateException("Utility class");
+    }
 
-    String DEFAULT_RETURN_MESSAGE = "content";
+    public static final String DEFAULT_RETURN_CODE = "code";
+
+    public static final String DEFAULT_RETURN_MESSAGE = "content";
 }

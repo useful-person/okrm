@@ -1,23 +1,21 @@
 package com.useful_person.nacos_config;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
 import com.alibaba.cloud.nacos.NacosConfigManager;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
 import jakarta.annotation.PostConstruct;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+@Slf4j
+@RequiredArgsConstructor
 @Component
 public class ConfigListener {
-
-    Logger logger = LoggerFactory.getLogger(ConfigListener.class);
 
     /**
      * Nacos dataId.
@@ -29,8 +27,7 @@ public class ConfigListener {
      */
     public static final String GROUP = "DEFAULT_GROUP";
 
-    @Autowired
-    private NacosConfigManager nacosConfigManager;
+    private final NacosConfigManager nacosConfigManager;
 
     @PostConstruct
     public void init() throws NacosException {
@@ -44,8 +41,7 @@ public class ConfigListener {
 
             @Override
             public void receiveConfigInfo(String configInfo) {
-                logger.info("[dataId]:[" + DATA_ID + "],Configuration changed to:"
-                        + configInfo);
+                log.info("[dataId]:[{}],Configuration changed to: {}", DATA_ID, configInfo);
             }
         });
     }

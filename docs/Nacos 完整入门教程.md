@@ -28,6 +28,7 @@ docker run -d \
 # 验证启动
 docker ps  # 查看容器状态为 Up
 # 访问控制台：http://localhost:8848/nacos
+# 3.0+默认是访问http://localhost:8849/index.html
 # 默认账号/密码：nacos/nacos（3.0+需初始化密码）
 ```
 
@@ -56,7 +57,7 @@ docker ps  # 查看容器状态为 Up
    nacos.core.auth.server.identity.key=serverIdentity
    nacos.core.auth.server.identity.value=security
    ```
-5. **验证**：访问 `http://localhost:8848/nacos`，初始化密码后登录。
+5. **验证**：访问 `http://localhost:8848/nacos` ，初始化密码后登录。nacos3.0+版本默认访问地址为 `http://localhost:8849/index.html`。
 
 ### 方式3：源码编译部署（二次开发）
 ```bash
@@ -74,7 +75,7 @@ sh startup.sh -m standalone  # Linux/Mac
 ```
 
 ## 三、控制台基础操作
-1. **登录**：访问 `http://localhost:8848/nacos`，输入账号密码登录。
+1. **登录**：访问 `http://localhost:8848/nacos` ，输入账号密码登录。nacos3.0+版本默认访问地址为 `http://localhost:8849/index.html`。
 2. **命名空间管理**：左侧「命名空间」→「新建」，创建 dev、test、prod 环境隔离空间。
 3. **配置管理**：
    - 左侧「配置管理」→「配置列表」→「+」新建配置。
@@ -192,7 +193,7 @@ public class ProviderController {
 - 添加 Feign 依赖：
   ```xml
   <dependency>
-      <groupId>org.springframework.cloud</groupId>
+      <groupId>org.springframework.cloud</groupId>Ï
       <artifactId>spring-cloud-starter-openfeign</artifactId>
       <version>4.1.0</version>
   </dependency>

@@ -1,33 +1,33 @@
 package com.useful_person.nacos_config.controller;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
 import com.alibaba.cloud.commons.lang.StringUtils;
 import com.alibaba.cloud.nacos.NacosConfigManager;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+@Slf4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/nacos")
 public class DockingInterface {
-
-    Logger logger = LoggerFactory.getLogger(DockingInterface.class);
 
     /**
      * Nacos group.
      */
     public static final String DEFAULT_GROUP = "DEFAULT_GROUP";
+    Logger logger = LoggerFactory.getLogger(DockingInterface.class);
 
-    @Autowired
     private NacosConfigManager nacosConfigManager;
 
     /**
@@ -39,8 +39,8 @@ public class DockingInterface {
      */
     @RequestMapping("/getConfig")
     public String getConfig(@RequestParam("dataId") String dataId,
-            @RequestParam(value = "group", required = false) String group)
-            throws NacosException {
+                            @RequestParam(value = "group", required = false) String group)
+        throws NacosException {
         if (StringUtils.isEmpty(group)) {
             group = DEFAULT_GROUP;
         }
@@ -58,8 +58,8 @@ public class DockingInterface {
      */
     @RequestMapping("/publishConfig")
     public boolean publishConfig(@RequestParam("dataId") String dataId,
-            @RequestParam(value = "group", required = false) String group,
-            @RequestParam("content") String content) throws NacosException {
+                                 @RequestParam(value = "group", required = false) String group,
+                                 @RequestParam("content") String content) throws NacosException {
         if (StringUtils.isEmpty(group)) {
             group = DEFAULT_GROUP;
         }
@@ -76,8 +76,8 @@ public class DockingInterface {
      */
     @RequestMapping("/removeConfig")
     public boolean removeConfig(@RequestParam("dataId") String dataId,
-            @RequestParam(value = "group", required = false) String group)
-            throws NacosException {
+                                @RequestParam(value = "group", required = false) String group)
+        throws NacosException {
         if (StringUtils.isEmpty(group)) {
             group = DEFAULT_GROUP;
         }
@@ -93,11 +93,8 @@ public class DockingInterface {
      */
     @RequestMapping("/listener")
     public String listenerConfig(@RequestParam("dataId") String dataId,
-            @RequestParam(value = "group", required = false, defaultValue = DEFAULT_GROUP) String group)
-            throws NacosException {
-//        if (StringUtils.isEmpty(group)) {
-//            group = DEFAULT_GROUP;
-//        }
+                                 @RequestParam(value = "group", required = false, defaultValue = DEFAULT_GROUP) String group)
+        throws NacosException {
         ConfigService configService = nacosConfigManager.getConfigService();
         configService.addListener(dataId, group, new Listener() {
             @Override

@@ -35,8 +35,8 @@ public class AppProperties {
 
     public String getOrigin() {
         String origin = this.host;
-        String port = StringUtils.trim(String.valueOf(this.port));
-        if (StringUtils.isNotBlank(port) && !openPort.equals(port)) {
+        String portStr = StringUtils.trim(String.valueOf(this.port));
+        if (StringUtils.isNotBlank(portStr) && !openPort.equals(portStr)) {
             origin += (":" + this.port);
         }
         return origin;
