@@ -4,14 +4,19 @@ server:
 spring:
   application:
     name: gateway-service
+  config:
+    import:
+      - classpath:gateway-routes.yml
+      - classpath:gateway-filter.yml
+      - classpath:gateway-cors.yml
+
   cloud:
     nacos:
-      serverAddr: "[::1]:8848"
-      # 以下配置项必须填写
-      username: "nacos"
-      password: "nacos"
-    gateway:
       discovery:
-        locator:
-          enabled: true # 开启服务发现自动路由
-          lower-case-service-id: true # 可选，服务名转小写
+        server-addr: "[::1]:8848"
+        username: nacos
+        password: nacos
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG

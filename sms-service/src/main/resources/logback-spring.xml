@@ -13,10 +13,10 @@
     </encoder>
   </appender>
 
-  <!-- <root level="INFO">
+  <root level="INFO">
     <appender-ref ref="CONSOLE" />
     <appender-ref ref="FILE" />
-  </root> -->
+  </root>
   <springProfile name="local">
     <root level="DEBUG">
       <appender-ref ref="CONSOLE" />
@@ -29,3 +29,4 @@
     </root>
   </springProfile>
 </configuration>
+

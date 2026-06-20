@@ -1,15 +1,18 @@
 package com.useful_person.okrm.user_service;
 
+import com.useful_person.nacos_config.model.NacosConfigInfo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-import com.useful_person.nacos.properties.SecurityProperties;
+import com.useful_person.nacos_config.properties.SecurityProperties;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableConfigurationProperties(SecurityProperties.class)
+//@EnableConfigurationProperties(SecurityProperties.class)
+//@EnableConfigurationProperties(NacosConfigInfo.class)
+@EnableConfigurationProperties
 public class UserServiceApplication {
 
     /**

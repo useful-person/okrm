@@ -1,5 +1,5 @@
-# 使用 JDK 作为基础镜像（假设 Spring Boot 需要 Java 运行环境）
-FROM openjdk:24-ea-17-jdk-slim-bullseye
+# 使用 JDK 作为基础镜像
+FROM eclipse-temurin:17-jdk
 
 # 设置工作目录
 WORKDIR /app

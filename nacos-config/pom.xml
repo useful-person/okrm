@@ -9,10 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-
-  <groupId>com.useful-person</groupId>
   <artifactId>nacos-config</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>nacos-config</name>
   <description>Demo project for Spring Boot</description>
 

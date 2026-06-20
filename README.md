@@ -15,6 +15,38 @@
 
 ```
 
+
+
+## 架构
+
+┌───────────────────────────────┐
+│      nacos-config-service      │  <─ 独立启动的配置中心服务
+│───────────────────────────────│
+│  Controller: ConfigController  │  <─ 提供增删改 Nacos 配置接口
+│  Properties: SecurityProperties│  <─ 内部映射配置，仅服务内部使用
+│  Nacos SDK / Client            │  <─ 操作 Nacos 配置中心
+└───────────────────────────────┘
+              │
+              │  通过 Nacos API 或 REST 获取配置
+              ▼
+┌───────────────────────────────┐
+│         Nacos 配置中心        │  <─ 配置存储和动态刷新
+│───────────────────────────────│
+│  okrm.security.* JSON 配置      │
+│  支持动态更新 & 发布           │
+└───────────────────────────────┘
+              │
+              │  Spring Cloud Alibaba / Nacos Client
+              ▼
+┌───────────────────────────────┐
+│         user-service           │  <─ 业务服务模块
+│───────────────────────────────│
+│  Controller: UserServiceController │
+│  Service: NacosConfigFetchService  │  <─ 调用 Nacos 获取配置
+│  DTO: SecurityPropertiesDTO        │  <─ 自己定义，和配置服务解耦
+│  @Value / @RefreshScope           │  <─ 可动态刷新配置
+└───────────────────────────────┘
+
 ## Maven 操作
 
 ### 清理 & 构建
@@ -422,8 +454,7 @@ java -Djasypt.encryptor.password.db=dbSecretKey \
 
 registry.cn-hangzhou.aliyuncs.com/useful-person/
 
-docker compose --env-file .env.unix up
-docker compose --env-file .env.window up
+docker compose --env-file .env.local up
 
 `.env` 文件**本身不能自动识别当前操作系统或环境来切换变量**，它只是一个静态的环境变量文件。但你可以用**一些变通方案**来实现 **“按平台选择不同配置”** 的效果：
 
@@ -527,6 +558,7 @@ docker compose --env-file $envFile up
 ### Dockerfile 示例（无需特别处理配置）：
 
 ```Dockerfile
+# FROM eclipse-temurin:17-jdk
 FROM openjdk:17-jdk-slim
 COPY target/myapp.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
@@ -549,6 +581,7 @@ Spring Boot 支持从环境变量中读取配置。
 ### Dockerfile 示例：
 
 ```Dockerfile
+# FROM eclipse-temurin:17-jdk
 FROM openjdk:17-jdk-slim
 COPY target/myapp.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
@@ -572,6 +605,7 @@ docker run -e SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mydb \
 ### Dockerfile 示例：
 
 ```Dockerfile
+# FROM eclipse-temurin:17-jdk
 FROM openjdk:17-jdk-slim
 COPY target/myapp.jar app.jar
 COPY config/application.properties /config/application.properties

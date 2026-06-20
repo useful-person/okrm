@@ -9,9 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <groupId>com.useful-person</groupId>
   <artifactId>ai-service</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>ai-service</name>
   <packaging>jar</packaging>
   <description>ai service project for Spring Boot</description>

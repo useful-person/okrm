@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        # 自定义响应头
+        - AddResponseHeader=X-Gateway, okrm-gateway
+        # - AddResponseHeader=X-Gateway1, okrm
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin

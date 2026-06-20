@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    discovery:
+      locator:
+        enabled: true
+        lower-case-service-id: true
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+
+        - id: sms-service
+          uri: lb://sms-service
+          predicates:
+            - Path=/sms/**
+          filters:
+            - StripPrefix=1

@@ -1,6 +1,7 @@
 services:
   mysql-primary:
-    image: registry.cn-hangzhou.aliyuncs.com/useful-person/mysql:8
+    # image: registry.cn-hangzhou.aliyuncs.com/useful-person/mysql:8
+    image: mysql:8
     container_name: mysql-primary
     restart: always
     environment:
@@ -9,16 +10,17 @@ services:
       MYSQL_USER: myuser
       MYSQL_PASSWORD: secret
     ports:
-      - "3307:3306"
+      - "4307:3306"
     volumes:
-      - "${MYSQL_PRIMARY_DATA_PATH}:/var/lib/mysql"
+      - ${HOME}/docker/okrm/mysql/mysql-primary:/var/lib/mysql
       - ./mysql-primary.cnf:/etc/mysql/conf.d/my.cnf
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
 
   mysql-secondary-1:
-    image: registry.cn-hangzhou.aliyuncs.com/useful-person/mysql:8
+    # image: registry.cn-hangzhou.aliyuncs.com/useful-person/mysql:8
+    image: mysql:8
     container_name: mysql-secondary-1
     restart: always
     environment:
@@ -27,17 +29,18 @@ services:
       MYSQL_USER: myuser
       MYSQL_PASSWORD: secret
     ports:
-      - "3308:3306"
+      - "4308:3306"
     depends_on:
       - mysql-primary
     volumes:
-      - "${MYSQL_SECONDARY_DATA_PATH}:/var/lib/mysql"
+      - ${HOME}/docker/okrm/mysql/mysql-secondary-1:/var/lib/mysql
       - ./mysql-secondary.cnf:/etc/mysql/conf.d/my.cnf
     networks:
       - app-network
 
   mysql-secondary-2:
-    image: registry.cn-hangzhou.aliyuncs.com/useful-person/mysql:8
+    # image: registry.cn-hangzhou.aliyuncs.com/useful-person/mysql:8
+    image: mysql:8
     container_name: mysql-secondary-2
     restart: always
     environment:
@@ -46,11 +49,11 @@ services:
       MYSQL_USER: myuser
       MYSQL_PASSWORD: secret
     ports:
-      - "3309:3306"
+      - "4309:3306"
     depends_on:
       - mysql-primary
     volumes:
-      - "${MYSQL_SECONDARY_1_DATA_PATH}:/var/lib/mysql"
+      - ${HOME}/docker/okrm/mysql/mysql-secondary-2:/var/lib/mysql
       - ./mysql-secondary.cnf:/etc/mysql/conf.d/my.cnf
     networks:
       - app-network
@@ -62,11 +65,11 @@ services:
     depends_on:
       - mysql-primary
     environment:
-      SPRING_PROFILES_ACTIVE: test
-      JASYPT_ENCRYPTOR_PASSWORD: okrm@2025
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-primary:3306/user_db
-      SPRING_DATASOURCE_USERNAME: myuser
-      SPRING_DATASOURCE_PASSWORD: ENC(WDYgHWcc1tNPwrX5vHV/bLhMOjokAensnK9nUnUKup8UGsL41zjjbfTpBFHaaqBJ)
+      SPRING_PROFILES_ACTIVE: ${ACTIVE}
+      JASYPT_ENCRYPTOR_PASSWORD: ${JASYPT_ENCRYPTOR_PASSWORD}
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_DOCKER_COMPOSE_ENABLED: false
     ports:

@@ -1,5 +1,6 @@
-# 使用 JDK 作为基础镜像（假设 Spring Boot 需要 Java 运行环境）
-FROM registry.cn-hangzhou.aliyuncs.com/useful-person/openjdk:25-ea-jdk-bullseye
+# 使用 JDK 作为基础镜像
+# FROM registry.cn-hangzhou.aliyuncs.com/useful-person/openjdk:25-ea-jdk-bullseye
+FROM eclipse-temurin:17-jdk
 
 # 设置工作目录
 WORKDIR /app

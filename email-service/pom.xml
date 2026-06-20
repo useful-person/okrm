@@ -9,9 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath> <!-- 父模块的路径 -->
   </parent>
-  <groupId>com.useful-person</groupId>
   <artifactId>email-service</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>email-service</name>
   <packaging>jar</packaging>
   <description>email service project for Spring Boot</description>
